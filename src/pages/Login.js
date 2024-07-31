@@ -11,7 +11,7 @@ import { addUser, removeUser } from "../redux/bazarSlice";
 import { useNavigate } from "react-router-dom";
 import { githubLogo, googleLogo } from "../assets";
 import firebase from 'firebase/app';
-import 'firebase/auth'; // Import other Firebase services as needed
+import 'firebase/auth'; 
 
 const Login = () => {
     const userInfo = useSelector((state) => state.bazar.userInfo);
