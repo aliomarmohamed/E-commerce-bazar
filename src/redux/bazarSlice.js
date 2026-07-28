@@ -27,7 +27,8 @@ export const bazarSlice = createSlice({
     resetCart: (state) => {
       state.productData = [];
     },
-    incrementQuantity: (state, action) => {
+    // تم إضافة حرف الـ a هنا ليطابق الاستدعاء المكسور في مشروعك بالضبط
+    increamentQuantity: (state, action) => {
       const item = state.productData.find(
         (item) => item._id === action.payload._id
       );
@@ -56,7 +57,7 @@ export const {
   addToCart,
   deleteItem,
   resetCart,
-  incrementQuantity,
+  increamentQuantity, // تصدير الدالة بالاسم المطابق
   decrementQuantity,
   addUser,
   removeUser,
