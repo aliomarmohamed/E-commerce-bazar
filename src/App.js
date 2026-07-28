@@ -5,7 +5,6 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "react-router-dom";
-import { productsData } from "./api/Api";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Product from "./components/Product";
@@ -31,8 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
-        loader: productsData,
+        element: <Home />, // تم إزالة سطر الـ loader لحل مشكلة الشاشة البيضاء تماماً
       },
       {
         path: "/product/:id",
