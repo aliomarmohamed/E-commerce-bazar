@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
+import CheckoutForm from "../components/CheckoutForm"; // استدعاء واجهة الدفع الجديدة الثنائية
 
 const Cart = () => {
     const productData = useSelector((state) => state.bazar.productData);
     const userInfo = useSelector((state) => state.bazar.userInfo);
     const [payNow, setPayNow] = useState(false);
-    const [totalAmt, setTotalAmt] = useState("");
+    const [totalAmt, setTotalAmt] = useState("0.00");
+
     useEffect(() => {
         let price = 0;
         productData.map((item) => {
@@ -27,12 +27,6 @@ const Cart = () => {
         } else {
             toast.error("Please sign in to Checkout");
         }
-    };
-    const payment = async (token) => {
-        await axios.post("http://localhost:3001/pay", {
-            amount: totalAmt * 100,
-            token: token,
-        });
     };
 
     return (
@@ -59,7 +53,7 @@ const Cart = () => {
                                 <span>
                                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                                     Quos, veritatis.
-                </span>
+                                </span>
                             </p>
                         </div>
                         <p className="font-titleFont font-semibold flex justify-between mt-6">
@@ -70,18 +64,15 @@ const Cart = () => {
                             className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300"
                         >
                             proceed to checkout
-            </button>
+                        </button>
 
+                        {/* ظهور واجهة اختيار Stripe أو Fawry بشكل ديناميكي بعد الضغط وتخطي فحص تسجيل الدخول */}
                         {payNow && (
-                            <div className="w-full mt-6 flex items-center justify-center">
-                                <StripeCheckout
-                                    stripeKey="pk_test_51PhJM4AQP7zvgWXNq6Oivk2DJQ71s0p226XuZZAqXCQlFIRTk04toIIIhNLu42uuOWeRsxh6DMK7Zllvp13KapCa001J41etrl"
-                                    name="Bazar Online Shopping"
-                                    amount={totalAmt * 100}
-                                    label="Pay to bazar"
-                                    description={`Your Payment amount is $${totalAmt}`}
-                                    token={payment}
-                                    email={userInfo.email}
+                            <div className="w-full mt-6">
+                                <CheckoutForm 
+                                    totalAmount={totalAmt} 
+                                    userEmail={userInfo ? userInfo.email : "customer@email.com"} 
+                                    userMobile={userInfo ? userInfo.phone : "01000000000"} 
                                 />
                             </div>
                         )}
@@ -90,16 +81,15 @@ const Cart = () => {
             ) : (
                     <div className="max-w-screen-xl mx-auto py-10 flex flex-col items-center gap-2 justify-center">
                         <p className="text-xl text-orange-600 font-titleFont font-semibold">
-                            Your Cart is Empty. Please go back to Shopping and add products to
-                            Cart.
-          </p>
+                            Your Cart is Empty. Please go back to Shopping and add products to Cart.
+                        </p>
                         <Link to="/">
                             <button className="flex items-center gap-1 text-gray-400 hover:text-black duration-300">
                                 <span>
                                     <HiOutlineArrowLeft />
                                 </span>
                                 go shopping
-            </button>
+                            </button>
                         </Link>
                     </div>
                 )}
