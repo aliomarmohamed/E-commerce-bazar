@@ -44,15 +44,19 @@ const Header = () => {
           </Link>
 
           <Link to="/login">
-            <img
-              className="w-8 h-8 rounded-full"
-              src={
-                userInfo
-                  ? userInfo.image
-                  : "https://images.pexels.com/photos/264547/pexels-photo-264547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              }
-              alt="userLogo"
-            />
+            {userInfo ? (
+              // إذا كان العميل مسجل، يعرض دائرة سوداء بداخلها أول حرف من اسمه بشكل احترافي ومتناسق مع تصميمك
+              <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm uppercase">
+                {userInfo.name ? userInfo.name.charAt(0) : "U"}
+              </div>
+            ) : (
+              // إذا لم يكن مسجل، يعرض الصورة الافتراضية للموقع القديم
+              <img
+                className="w-8 h-8 rounded-full"
+                src="https://images.pexels.com/photos/264547/pexels-photo-264547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="userLogo"
+              />
+            )}
           </Link>
 
           {userInfo && (
