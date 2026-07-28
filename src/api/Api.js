@@ -1,11 +1,16 @@
 import axios from "axios";
 
-// 1. الدالة القديمة الخاصة بجلب المنتجات (تُركت كما هي لضمان عدم حدوث أي خطأ في الموقع)
+// 1. دالة جلب المنتجات (تم إرجاع الرابط البرمجي الصحيح والشغال للمنتجات)
 export async function productsData() {
-  const products = await axios.get(
-    "https://reactbd.com"
-  );
-  return products;
+  try {
+    const products = await axios.get(
+      "https://reactbd.com"
+    );
+    return products;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
 }
 
 // 2. أداة الاتصال الموحدة بالسيرفر المحلي والـ Vercel لاحقاً
@@ -14,12 +19,22 @@ const localAPI = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// 3. الدالة الجديدة والمسؤولة عن إرسال طلبات بوابة دفع Stripe و Fawry
+// 3. دالة إرسال طلبات بوابات الدفع (Stripe + Fawry)
 export const requestPayment = async (endpoint, data) => {
   try {
     const response = await localAPI.post(`/api/payments/${endpoint}`, data);
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : new Error('فشل الاتصال بالخادم');
+  }
+};
+
+// 4. دالة إرسال طلبات الحسابات البديلة لـ Firebase (تسجيل ودخول) إلى MongoDB
+export const requestAuth = async (endpoint, data) => {
+  try {
+    const response = await localAPI.post(`/api/auth/${endpoint}`, data);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('حدث خطأ في عملية الحساب');
   }
 };
