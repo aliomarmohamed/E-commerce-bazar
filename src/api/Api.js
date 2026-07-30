@@ -4,7 +4,7 @@ import axios from "axios";
 export async function productsData() {
   try {
     const products = await axios.get(
-      "https://reactbd.com"
+      "https://fakestoreapi.com/products"
     );
     return products;
   } catch (error) {
