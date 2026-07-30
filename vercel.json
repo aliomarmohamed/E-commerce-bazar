@@ -1,11 +1,13 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/:path*",
       "destination": "/api/index.js"
     },
     {
-      "source": "/((?!api).*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ]
