@@ -30,6 +30,10 @@ const ProductsCard = ({ product }) => {
                     className="w-full h-full object-contain group-hover:scale-110 duration-500"
                     src={product.image}
                     alt="productImg"
+                    onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = `${process.env.PUBLIC_URL || ''}/images/kids-prod1.svg`;
+                    }}
                 />
             </div>
             <div className="w-full px-4 py-4">

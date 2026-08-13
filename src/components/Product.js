@@ -19,9 +19,13 @@ const Product = () => {
             <div className="max-w-screen-xl mx-auto my-10 flex gap-10">
                 <div className="w-2/5 relative">
                     <img
-                        className="w-full h-[550px] object-cover"
+                        className="w-full h-[550px] object-contain"
                         src={details.image}
                         alt="productImg"
+                        onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = `${process.env.PUBLIC_URL || ''}/images/kids-prod1.svg`;
+                        }}
                     />
                     <div className="absolute top-4 right-0">
                         {details.isNew && (
