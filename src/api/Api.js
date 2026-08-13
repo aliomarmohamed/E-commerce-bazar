@@ -24,8 +24,10 @@ export async function productsData() {
 }
 
 // 2. أداة الاتصال الموحدة بالسيرفر المحلي والـ Vercel لاحقاً
+const API_BASE = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000');
+
 const localAPI = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001',
+  baseURL: API_BASE,
   headers: { 'Content-Type': 'application/json' },
 });
 
