@@ -8,11 +8,11 @@ export async function productsData() {
     // Normalize products to include `_id` (used across the app) and
     // replace images with neutral placeholders to avoid photos of people
     if (products && Array.isArray(products.data)) {
-      products.data = products.data.map((p) => ({
+      products.data = products.data.map((p, i) => ({
         ...p,
         _id: p.id || p._id || String(Math.random()).slice(2),
-        // Replace external images with a deterministic Kids Wear placeholder
-        image: `https://placehold.co/400x400?text=${encodeURIComponent('Kids Wear')}`,
+        // Use local product SVG placeholders from /public/images
+        image: `${process.env.PUBLIC_URL || ''}/images/kids-prod${(i % 3) + 1}.svg`,
       }));
     }
     return products;

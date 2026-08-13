@@ -4,12 +4,12 @@ import { cartImg } from "../assets/index";
 
 const Banner = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    // Use Kids Wear placeholder banners to ensure images load and match theme
+    // Use local banner images
     const data = [
-        "https://placehold.co/1200x650?text=Kids+Wear+Banner+1",
-        "https://placehold.co/1200x650?text=Kids+Wear+Banner+2",
-        "https://placehold.co/1200x650?text=Kids+Wear+Banner+3",
-        "https://placehold.co/1200x650?text=Kids+Wear+Banner+4",
+        `${process.env.PUBLIC_URL || ''}/images/kids1.svg`,
+        `${process.env.PUBLIC_URL || ''}/images/kids2.svg`,
+        `${process.env.PUBLIC_URL || ''}/images/kids3.svg`,
+        `${process.env.PUBLIC_URL || ''}/images/kids4.svg`,
     ];
     const prevSlide = () => {
         setCurrentSlide((prev) => (prev === 0 ? 3 : prev - 1));

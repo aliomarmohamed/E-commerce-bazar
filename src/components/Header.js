@@ -50,7 +50,7 @@ const Header = () => {
               </div>
             ) : (
               // Use a neutral local logo image for the default user avatar
-              <img className="w-8 h-8 rounded-full" src={"https://placehold.co/80x80?text=Kids"} alt="userLogo" />
+              <img className="w-8 h-8 rounded-full" src={`${process.env.PUBLIC_URL || ''}/images/kids-avatar.svg`} alt="userLogo" />
             )}
           </Link>
 
