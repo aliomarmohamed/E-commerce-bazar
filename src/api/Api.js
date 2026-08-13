@@ -3,23 +3,28 @@ import sampleProducts from "../data/sampleProducts.js";
 
 // 1. دالة جلب المنتجات (يحاول جلبها من fakestore, وعلى الفشل يستخدم بيانات محلية)
 export async function productsData() {
+  // By default use local sample products to avoid external network errors and
+  // to guarantee our images are always neutral and available. Set
+  // `REACT_APP_USE_REMOTE_PRODUCTS=true` in env to attempt fetching remote
+  // products (not recommended for production without guarantees).
+  const allowRemote = process.env.REACT_APP_USE_REMOTE_PRODUCTS === "true";
+  if (!allowRemote) {
+    return { data: sampleProducts.map((p, i) => ({ ...p, _id: p.id || String(i + 1), image: `${process.env.PUBLIC_URL || ''}/images/kids-prod${(i % 3) + 1}.svg` })) };
+  }
+
   try {
     const products = await axios.get("https://fakestoreapi.com/products");
-    // Normalize products to include `_id` (used across the app) and
-    // replace images with neutral placeholders to avoid photos of people
     if (products && Array.isArray(products.data)) {
       products.data = products.data.map((p, i) => ({
         ...p,
         _id: p.id || p._id || String(Math.random()).slice(2),
-        // Use local product SVG placeholders from /public/images
         image: `${process.env.PUBLIC_URL || ''}/images/kids-prod${(i % 3) + 1}.svg`,
       }));
     }
     return products;
   } catch (error) {
     console.error("Error fetching products, falling back to local data:", error && error.message ? error.message : error);
-    // Use local sample products as a fallback so the UI remains functional
-    return { data: sampleProducts.map((p) => ({ ...p, _id: p.id })) };
+    return { data: sampleProducts.map((p, i) => ({ ...p, _id: p.id || String(i + 1), image: `${process.env.PUBLIC_URL || ''}/images/kids-prod${(i % 3) + 1}.svg` })) };
   }
 }
 
