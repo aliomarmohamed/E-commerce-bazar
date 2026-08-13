@@ -11,8 +11,8 @@ export async function productsData() {
       products.data = products.data.map((p) => ({
         ...p,
         _id: p.id || p._id || String(Math.random()).slice(2),
-        // Replace external images with a deterministic placeholder
-        image: `https://placehold.co/400x400?text=${encodeURIComponent(p.title)}`,
+        // Replace external images with a deterministic Kids Wear placeholder
+        image: `https://placehold.co/400x400?text=${encodeURIComponent('Kids Wear')}`,
       }));
     }
     return products;

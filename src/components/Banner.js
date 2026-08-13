@@ -4,8 +4,13 @@ import { cartImg } from "../assets/index";
 
 const Banner = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    // Use local neutral images to avoid external broken links and ensure no people
-    const data = [cartImg, cartImg, cartImg, cartImg];
+    // Use Kids Wear placeholder banners to ensure images load and match theme
+    const data = [
+        "https://placehold.co/1200x650?text=Kids+Wear+Banner+1",
+        "https://placehold.co/1200x650?text=Kids+Wear+Banner+2",
+        "https://placehold.co/1200x650?text=Kids+Wear+Banner+3",
+        "https://placehold.co/1200x650?text=Kids+Wear+Banner+4",
+    ];
     const prevSlide = () => {
         setCurrentSlide(currentSlide === 0 ? 3 : (prev) => prev - 1);
     };

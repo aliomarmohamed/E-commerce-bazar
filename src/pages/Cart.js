@@ -32,7 +32,7 @@ const Cart = () => {
 
     return (
         <div>
-            <img className="w-full h-60 object-cover" src={cartImg} alt="cartImg" />
+            <img className="w-full h-60 object-cover" src={"https://placehold.co/1200x400?text=Kids+Wear+Banner"} alt="cartImg" />
             {productData.length > 0 ? (
                 <div className="max-w-screen-xl mx-auto py-20 flex">
                     <CartItem />

@@ -6,7 +6,7 @@ const sampleProducts = [
     oldPrice: 49.99,
     description: 'A comfortable sample shirt.',
     category: 'clothing',
-    image: 'https://placehold.co/400x400?text=Sample+Shirt',
+    image: 'https://placehold.co/400x400?text=Kids+Wear+Shirt',
     isNew: true,
   },
   {
@@ -16,7 +16,7 @@ const sampleProducts = [
     oldPrice: 89.99,
     description: 'Stylish sample shoes.',
     category: 'footwear',
-    image: 'https://placehold.co/400x400?text=Sample+Shoes',
+    image: 'https://placehold.co/400x400?text=Kids+Wear+Shoes',
     isNew: false,
   },
 ];
