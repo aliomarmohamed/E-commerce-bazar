@@ -34,6 +34,11 @@ exports.createPaymentIntent = async (req, res) => {
         }
         // Stripe expects amount in the smallest currency unit (cents)
         const amountInCents = Math.round(Number(amount) * 100);
+        // If STRIPE_SECRET_KEY is not configured, return a simulated client secret
+        if (!process.env.STRIPE_SECRET_KEY) {
+            const fakeSecret = `sim_client_secret_${Date.now()}`;
+            return res.status(200).json({ clientSecret: fakeSecret, simulated: true });
+        }
         const paymentIntent = await stripe.paymentIntents.create({
             amount: amountInCents,
             currency: String(currency).toLowerCase(),

@@ -1,6 +1,7 @@
 import axios from "axios";
+import sampleProducts from "../data/sampleProducts.js";
 
-// 1. دالة جلب المنتجات (تم إرجاع الرابط البرمجي الصحيح والشغال للمنتجات)
+// 1. دالة جلب المنتجات (يحاول جلبها من fakestore, وعلى الفشل يستخدم بيانات محلية)
 export async function productsData() {
   try {
     const products = await axios.get("https://fakestoreapi.com/products");
@@ -16,8 +17,9 @@ export async function productsData() {
     }
     return products;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    throw error;
+    console.error("Error fetching products, falling back to local data:", error && error.message ? error.message : error);
+    // Use local sample products as a fallback so the UI remains functional
+    return { data: sampleProducts.map((p) => ({ ...p, _id: p.id })) };
   }
 }
 
