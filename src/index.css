@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global tweaks to improve contrast and make the site look less 'all white' */
+body {
+	background-color: #f3f4f6; /* subtle gray */
+}
+
+.product-card-wrapper {
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+	overflow: hidden;
+}
+
+.product-image-placeholder {
+	background-color: #e6e6e6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.site-container {
+	background: linear-gradient(180deg, rgba(243,244,246,0.6), rgba(255,255,255,0));
+}

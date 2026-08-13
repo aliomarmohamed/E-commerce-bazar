@@ -21,18 +21,18 @@ const ProductsCard = ({ product }) => {
         });
     };
     return (
-        <div className="w-full relative group">
+        <div className="w-full relative group product-card-wrapper">
             <div
                 onClick={handleDetails}
-                className="w-full h-96 cursor-pointer overflow-hidden"
+                className="w-full h-96 cursor-pointer overflow-hidden product-image-placeholder"
             >
                 <img
-                    className="w-full h-full object-cover group-hover:scale-110 duration-500"
+                    className="w-full h-full object-contain group-hover:scale-110 duration-500"
                     src={product.image}
                     alt="productImg"
                 />
             </div>
-            <div className="w-full border-[1px] px-2 py-4">
+            <div className="w-full px-4 py-4">
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="font-titleFont text-base font-bold">
