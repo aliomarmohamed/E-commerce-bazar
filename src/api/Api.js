@@ -3,9 +3,17 @@ import axios from "axios";
 // 1. دالة جلب المنتجات (تم إرجاع الرابط البرمجي الصحيح والشغال للمنتجات)
 export async function productsData() {
   try {
-    const products = await axios.get(
-      "https://fakestoreapi.com/products"
-    );
+    const products = await axios.get("https://fakestoreapi.com/products");
+    // Normalize products to include `_id` (used across the app) and
+    // replace images with neutral placeholders to avoid photos of people
+    if (products && Array.isArray(products.data)) {
+      products.data = products.data.map((p) => ({
+        ...p,
+        _id: p.id || p._id || String(Math.random()).slice(2),
+        // Replace external images with a deterministic placeholder
+        image: `https://placehold.co/400x400?text=${encodeURIComponent(p.title)}`,
+      }));
+    }
     return products;
   } catch (error) {
     console.error("Error fetching products:", error);
