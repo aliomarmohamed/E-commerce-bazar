@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
+import { cartImg } from "../assets/index";
 
 const Banner = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const data = [
-        "https://amazonproone.vercel.app/static/media/img2.bc1bdb910ead16c65197.jpg",
-        "https://amazonproone.vercel.app/static/media/img5.aa945e25375bfdee385f.jpg",
-        "https://amazonproone.vercel.app/static/media/img3.c80809bb40bee5c34372.jpg",
-        "https://amazonproone.vercel.app/static/media/img1.efb3d39101f7ef77d616.jpg",
-    ];
+    // Use local neutral images to avoid external broken links and ensure no people
+    const data = [cartImg, cartImg, cartImg, cartImg];
     const prevSlide = () => {
         setCurrentSlide(currentSlide === 0 ? 3 : (prev) => prev - 1);
     };

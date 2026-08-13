@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm"; // استدعاء واجهة الدفع الجديدة الثنائية
+import { cartImg } from "../assets/index";
 
 const Cart = () => {
     const productData = useSelector((state) => state.bazar.productData);
@@ -31,11 +32,7 @@ const Cart = () => {
 
     return (
         <div>
-            <img
-                className="w-full h-60 object-cover"
-                src="https://images.pexels.com/photos/1435752/pexels-photo-1435752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="cartImg"
-            />
+            <img className="w-full h-60 object-cover" src={cartImg} alt="cartImg" />
             {productData.length > 0 ? (
                 <div className="max-w-screen-xl mx-auto py-20 flex">
                     <CartItem />

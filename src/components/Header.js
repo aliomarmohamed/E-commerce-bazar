@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { cartImg, logoDark } from "../assets/index";
+import { cartImg, logoDark, logoLight } from "../assets/index";
 
 const Header = () => {
   const productData = useSelector((state) => state.bazar.productData);
@@ -45,17 +45,12 @@ const Header = () => {
 
           <Link to="/login">
             {userInfo ? (
-              // إذا كان العميل مسجل، يعرض دائرة سوداء بداخلها أول حرف من اسمه بشكل احترافي ومتناسق مع تصميمك
               <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm uppercase">
                 {userInfo.name ? userInfo.name.charAt(0) : "U"}
               </div>
             ) : (
-              // إذا لم يكن مسجل، يعرض الصورة الافتراضية للموقع القديم
-              <img
-                className="w-8 h-8 rounded-full"
-                src="https://images.pexels.com/photos/264547/pexels-photo-264547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="userLogo"
-              />
+              // Use a neutral local logo image for the default user avatar
+              <img className="w-8 h-8 rounded-full" src={logoLight} alt="userLogo" />
             )}
           </Link>
 
